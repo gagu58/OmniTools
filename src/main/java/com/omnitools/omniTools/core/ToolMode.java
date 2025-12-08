@@ -6,7 +6,7 @@ package com.omnitools.omniTools.core;
  */
 public enum ToolMode {
     WRENCH("wrench", "普通扳手模式"),
-    ME_BEAM_FORMER("me_beam_former", "ME光束绑定器模式");
+    LINK("link", "连接模式");
 
     private final String id;
     private final String displayName;

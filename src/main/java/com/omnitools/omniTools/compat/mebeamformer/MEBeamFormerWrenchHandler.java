@@ -39,8 +39,8 @@ public class MEBeamFormerWrenchHandler implements IWrenchHandler {
 
     @Override
     public boolean canHandle(WrenchContext context) {
-        // 只在 ME 光束模式下处理
-        return context.getCurrentMode() == com.omnitools.omniTools.core.ToolMode.ME_BEAM_FORMER;
+        // 只在连接模式下处理
+        return context.getCurrentMode() == com.omnitools.omniTools.core.ToolMode.LINK;
     }
 
     @Override
