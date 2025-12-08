@@ -1,12 +1,15 @@
 {
-  "required": true,
+  "required": false,
   "minVersion": "0.8",
   "package": "com.omnitools.omniTools.mixin",
+  "plugin": "com.omnitools.omniTools.mixin.OmniToolsMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "powah.EnergizingOrbBlockMixin"
   ],
   "client": [
+    "powah.EnergizingRodRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
