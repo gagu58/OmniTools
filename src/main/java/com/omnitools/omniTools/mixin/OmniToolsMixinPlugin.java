@@ -1,6 +1,8 @@
 package com.omnitools.omniTools.mixin;
 
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.LoadingModList;
+import net.neoforged.fml.loading.moddiscovery.ModInfo;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -21,11 +23,17 @@ public class OmniToolsMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        // Powah模组不存在的时候不加载Powah下的mixin
         if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.powah.")) {
-            return ModList.get() != null && ModList.get().isLoaded("powah");
+            return isModLoaded("powah");
         }
         return true;
+    }
+
+    private static boolean isModLoaded(String modId) {
+        if (ModList.get() == null) {
+            return LoadingModList.get().getMods().stream().map(ModInfo::getModId).anyMatch(modId::equals);
+        }
+        return ModList.get().isLoaded(modId);
     }
 
     @Override
