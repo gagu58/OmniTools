@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "item/generated",
   "textures": {
-    "layer0": "minecraft:item/stick"
+    "layer0": "omnitools:item/omni_wrench"
   }
 }
