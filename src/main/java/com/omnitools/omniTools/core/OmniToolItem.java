@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.neoforged.fml.ModList;
 
 public class OmniToolItem extends Item {
     private static final String MODE_TAG = "ToolMode";
@@ -33,7 +34,11 @@ public class OmniToolItem extends Item {
         if (customData != null) {
             CompoundTag tag = customData.copyTag();
             if (tag.contains(MODE_TAG)) {
-                return ToolMode.fromId(tag.getString(MODE_TAG));
+                ToolMode mode = ToolMode.fromId(tag.getString(MODE_TAG));
+                if (mode == ToolMode.RENAME && !isRenameModeEnabled()) {
+                    return ToolMode.WRENCH;
+                }
+                return mode;
             }
         }
         return ToolMode.WRENCH;
@@ -58,8 +63,19 @@ public class OmniToolItem extends Item {
     public static void cycleMode(ItemStack stack) {
         ToolMode current = getMode(stack);
         ToolMode[] modes = ToolMode.values();
-        int nextIndex = (current.ordinal() + 1) % modes.length;
-        setMode(stack, modes[nextIndex]);
+        ToolMode next = current;
+        for (int i = 1; i <= modes.length; i++) {
+            ToolMode candidate = modes[(current.ordinal() + i) % modes.length];
+            if (candidate != ToolMode.RENAME || isRenameModeEnabled()) {
+                next = candidate;
+                break;
+            }
+        }
+        setMode(stack, next);
+    }
+
+    private static boolean isRenameModeEnabled() {
+        return ModList.get() != null && ModList.get().isLoaded("ae2");
     }
 
     @Override

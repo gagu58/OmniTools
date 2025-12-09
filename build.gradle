@@ -141,6 +141,8 @@ dependencies {
     implementation "mezz.jei:jei-1.21.1-neoforge:19.21.0.247"
     implementation "curse.maven:glodium-957920:5821676"
     implementation "curse.maven:cloth-config-348521:5729127"
+    implementation "curse.maven:ex-pattern-provider-892005:7129221"
+    implementation "curse.maven:glodium-957920:5787208"
 
     //纠缠方块依赖
     implementation "curse.maven:supermartijn642s-core-lib-454372:6076757"

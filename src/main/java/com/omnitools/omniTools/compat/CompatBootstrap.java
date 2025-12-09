@@ -1,8 +1,10 @@
 package com.omnitools.omniTools.compat;
 
+import com.omnitools.omniTools.compat.ae2.AE2RenameUseHandler;
 import com.omnitools.omniTools.compat.create.CreateValueSettingsPreHandler;
 import com.omnitools.omniTools.compat.entangled.EntangledBinderUseHandler;
 import com.omnitools.omniTools.compat.entangled.EntangledBinderWrenchHandler;
+import com.omnitools.omniTools.compat.extendedae.ExtendedAERenamePreHandler;
 import com.omnitools.omniTools.compat.immersiveengineering.IEWrenchHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerWrenchHandler;
@@ -17,6 +19,12 @@ public class CompatBootstrap {
     public static void registerHandlers() {
         if (ModList.get().isLoaded("immersiveengineering")) {
             WrenchHandlerRegistry.register(new IEWrenchHandler());
+        }
+        if (ModList.get().isLoaded("ae2")) {
+            UseHandlerRegistry.register(new AE2RenameUseHandler());
+        }
+        if (ModList.get().isLoaded("extendedae")) {
+            NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ExtendedAERenamePreHandler::onRightClickBlock);
         }
         if (ModList.get().isLoaded("me_beam_former")) {
             WrenchHandlerRegistry.register(new MEBeamFormerWrenchHandler());

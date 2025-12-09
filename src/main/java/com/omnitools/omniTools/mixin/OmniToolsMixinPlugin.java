@@ -29,6 +29,9 @@ public class OmniToolsMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.mebeamformer.")) {
             return isModLoaded("me_beam_former");
         }
+        if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.ae2.")) {
+            return isModLoaded("ae2");
+        }
         return true;
     }
 

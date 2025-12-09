@@ -29,7 +29,7 @@ public abstract class ItemStackMixin {
             return;
         }
         ToolMode mode = OmniToolItem.getMode(self);
-        if (mode == ToolMode.LINK) {
+        if (mode == ToolMode.LINK || mode == ToolMode.RENAME) {
             cir.setReturnValue(false);
         }
     }

@@ -6,7 +6,8 @@ package com.omnitools.omniTools.core;
  */
 public enum ToolMode {
     WRENCH("wrench", "普通扳手模式"),
-    LINK("link", "连接模式");
+    LINK("link", "连接模式"),
+    RENAME("rename", "改名模式");
 
     private final String id;
     private final String displayName;

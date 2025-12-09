@@ -6,7 +6,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "ItemStackMixin",
-    "powah.EnergizingOrbBlockMixin"
+    "powah.EnergizingOrbBlockMixin",
+    "ae2.OmniToolItemAEMenuItemMixin"
   ],
   "client": [
     "powah.EnergizingRodRendererMixin",

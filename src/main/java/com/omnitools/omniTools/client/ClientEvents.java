@@ -37,7 +37,16 @@ public class ClientEvents {
             ItemProperties.register(
                     ModItems.OMNI_WRENCH.get(),
                     ResourceLocation.fromNamespaceAndPath("omnitools", "mode"),
-                    (stack, level, entity, seed) -> OmniToolItem.getMode(stack) == ToolMode.LINK ? 1.0F : 0.0F
+                    (stack, level, entity, seed) -> {
+                        ToolMode mode = OmniToolItem.getMode(stack);
+                        if (mode == ToolMode.LINK) {
+                            return 1.0F;
+                        }
+                        if (mode == ToolMode.RENAME) {
+                            return 2.0F;
+                        }
+                        return 0.0F;
+                    }
             );
 
             if (ModList.get().isLoaded("entangled")) {

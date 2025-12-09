@@ -7,6 +7,10 @@
     {
       "predicate": { "omnitools:mode": 1.0 },
       "model": "omnitools:item/omni_wrench_binder"
+    },
+    {
+      "predicate": { "omnitools:mode": 2.0 },
+      "model": "omnitools:item/omni_wrench_rename"
     }
   ]
 }
