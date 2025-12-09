@@ -1,13 +1,11 @@
 package com.omnitools.omniTools.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.omnitools.omniTools.compat.entangled.EntangledHighlightHandler;
 import com.omnitools.omniTools.core.OmniToolItem;
 import com.omnitools.omniTools.core.ModItems;
 import com.omnitools.omniTools.core.ToolMode;
 import com.omnitools.omniTools.network.SyncToolModePacket;
-import com.supermartijn642.core.render.RenderUtils;
-import com.supermartijn642.core.render.RenderWorldEvent;
-import com.supermartijn642.entangled.EntangledBinderItem;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -19,10 +17,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
@@ -39,6 +39,10 @@ public class ClientEvents {
                     ResourceLocation.fromNamespaceAndPath("omnitools", "mode"),
                     (stack, level, entity, seed) -> OmniToolItem.getMode(stack) == ToolMode.LINK ? 1.0F : 0.0F
             );
+
+            if (ModList.get().isLoaded("entangled")) {
+                NeoForge.EVENT_BUS.addListener(EntangledHighlightHandler::onRenderWorld);
+            }
         });
     }
 
@@ -81,53 +85,6 @@ public class ClientEvents {
                     }
                 }
             }
-        }
-    }
-
-
-
-
-
-
-
-    //纠缠方块模组的选择方块渲染
-    @EventBusSubscriber(modid = "omnitools", value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
-    public static class HighlightEvents {
-        @SubscribeEvent
-        public static void onRenderWorld(RenderWorldEvent event) {
-            Minecraft mc = Minecraft.getInstance();
-            Player player = mc.player;
-            Level world = mc.level;
-            if (player == null || world == null) {
-                return;
-            }
-
-            ItemStack stack = player.getMainHandItem();
-            if (stack.getItem() != ModItems.OMNI_WRENCH.get()) {
-                return;
-            }
-
-            if (OmniToolItem.getMode(stack) != ToolMode.LINK) {
-                return;
-            }
-
-            EntangledBinderItem.BinderTarget target = stack.get(EntangledBinderItem.BINDER_TARGET);
-            if (target == null || !target.dimension().equals(world.dimension().location())) {
-                return;
-            }
-
-            var pos = target.pos();
-
-            event.getPoseStack().pushPose();
-            Vec3 camera = RenderUtils.getCameraPosition();
-            event.getPoseStack().translate(-camera.x, -camera.y, -camera.z);
-            event.getPoseStack().translate(pos.getX(), pos.getY(), pos.getZ());
-
-            var shape = world.getBlockState(pos).getOcclusionShape(world, pos);
-            RenderUtils.renderShape(event.getPoseStack(), shape, 235 / 255f, 210 / 255f, 52 / 255f, false);
-            RenderUtils.renderShapeSides(event.getPoseStack(), shape, 235 / 255f, 210 / 255f, 52 / 255f, 30 / 255f, false);
-
-            event.getPoseStack().popPose();
         }
     }
 }

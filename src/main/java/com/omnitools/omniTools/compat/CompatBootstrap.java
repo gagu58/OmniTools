@@ -1,5 +1,6 @@
 package com.omnitools.omniTools.compat;
 
+import com.omnitools.omniTools.compat.create.CreateValueSettingsPreHandler;
 import com.omnitools.omniTools.compat.entangled.EntangledBinderUseHandler;
 import com.omnitools.omniTools.compat.entangled.EntangledBinderWrenchHandler;
 import com.omnitools.omniTools.compat.immersiveengineering.IEWrenchHandler;
@@ -8,7 +9,9 @@ import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerWrenchHandler;
 import com.omnitools.omniTools.compat.powah.PowahLinkWrenchHandler;
 import com.omnitools.omniTools.core.UseHandlerRegistry;
 import com.omnitools.omniTools.core.WrenchHandlerRegistry;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.common.NeoForge;
 
 public class CompatBootstrap {
     public static void registerHandlers() {
@@ -25,6 +28,9 @@ public class CompatBootstrap {
         if (ModList.get().isLoaded("entangled")) {
             WrenchHandlerRegistry.register(new EntangledBinderWrenchHandler());
             UseHandlerRegistry.register(new EntangledBinderUseHandler());
+        }
+        if (ModList.get().isLoaded("create")) {
+            NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, CreateValueSettingsPreHandler::onRightClickBlock);
         }
     }
 }
