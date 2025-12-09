@@ -2,5 +2,11 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "omnitools:item/omni_wrench"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": { "omnitools:mode": 1.0 },
+      "model": "omnitools:item/omni_wrench_binder"
+    }
+  ]
 }
