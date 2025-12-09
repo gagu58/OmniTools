@@ -9,7 +9,8 @@
     "powah.EnergizingOrbBlockMixin"
   ],
   "client": [
-    "powah.EnergizingRodRendererMixin"
+    "powah.EnergizingRodRendererMixin",
+    "mebeamformer.WirelessEnergyTowerRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

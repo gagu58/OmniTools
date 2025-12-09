@@ -26,6 +26,9 @@ public class OmniToolsMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.powah.")) {
             return isModLoaded("powah");
         }
+        if (mixinClassName.startsWith("com.omnitools.omniTools.mixin.mebeamformer.")) {
+            return isModLoaded("me_beam_former");
+        }
         return true;
     }
 
