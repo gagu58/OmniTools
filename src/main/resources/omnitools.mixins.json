@@ -10,6 +10,7 @@
     "ae2.OmniToolItemAEMenuItemMixin"
   ],
   "client": [
+    "draconicevolution.ClientEventHandlerMixin",
     "powah.EnergizingRodRendererMixin",
     "mebeamformer.WirelessEnergyTowerRendererMixin"
   ],

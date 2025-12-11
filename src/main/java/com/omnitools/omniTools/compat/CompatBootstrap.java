@@ -5,11 +5,15 @@ import com.omnitools.omniTools.compat.create.CreateValueSettingsPreHandler;
 import com.omnitools.omniTools.compat.entangled.EntangledBinderUseHandler;
 import com.omnitools.omniTools.compat.entangled.EntangledBinderWrenchHandler;
 import com.omnitools.omniTools.compat.extendedae.ExtendedAERenamePreHandler;
+import com.omnitools.omniTools.compat.extendedae.ExtendedAEWirelessUseHandler;
+import com.omnitools.omniTools.compat.extendedae.ExtendedAEWirelessWrenchHandler;
 import com.omnitools.omniTools.compat.immersiveengineering.IEWrenchHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerUseHandler;
 import com.omnitools.omniTools.compat.mebeamformer.MEBeamFormerWrenchHandler;
 import com.omnitools.omniTools.compat.mekanism.MekanismTransmitterWrenchHandler;
 import com.omnitools.omniTools.compat.powah.PowahLinkWrenchHandler;
+import com.omnitools.omniTools.compat.draconicevolution.DraconicLinkWrenchHandler;
+import com.omnitools.omniTools.compat.draconicevolution.DraconicLinkUseHandler;
 import com.omnitools.omniTools.core.UseHandlerRegistry;
 import com.omnitools.omniTools.core.WrenchHandlerRegistry;
 import net.neoforged.bus.api.EventPriority;
@@ -29,6 +33,8 @@ public class CompatBootstrap {
         }
         if (ModList.get().isLoaded("extendedae")) {
             NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, ExtendedAERenamePreHandler::onRightClickBlock);
+            WrenchHandlerRegistry.register(new ExtendedAEWirelessWrenchHandler());
+            UseHandlerRegistry.register(new ExtendedAEWirelessUseHandler());
         }
         if (ModList.get().isLoaded("me_beam_former")) {
             WrenchHandlerRegistry.register(new MEBeamFormerWrenchHandler());
@@ -36,6 +42,10 @@ public class CompatBootstrap {
         }
         if (ModList.get().isLoaded("powah")) {
             WrenchHandlerRegistry.register(new PowahLinkWrenchHandler());
+        }
+        if (ModList.get().isLoaded("draconicevolution")) {
+            WrenchHandlerRegistry.register(new DraconicLinkWrenchHandler());
+            UseHandlerRegistry.register(new DraconicLinkUseHandler());
         }
         if (ModList.get().isLoaded("entangled")) {
             WrenchHandlerRegistry.register(new EntangledBinderWrenchHandler());
