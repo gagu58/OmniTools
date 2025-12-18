@@ -17,5 +17,11 @@ public class NetworkHandler {
                 SyncToolModePacket.CODEC,
                 (packet, context) -> packet.handle(context)
         );
+
+        registrar.playToServer(
+                SyncVajraMiningSpeedPacket.TYPE,
+                SyncVajraMiningSpeedPacket.CODEC,
+                (packet, context) -> packet.handle(context)
+        );
     }
 }
