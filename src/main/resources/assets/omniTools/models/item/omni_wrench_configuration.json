@@ -1,12 +1,21 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "omnitools:item/omni_wrench_configuration"
-  },
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [48, 76, 0],
-      "translation": [1.75, 5.75, 2.75]
-    }
-  }
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "omnitools:item/omni_wrench_configuration"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 2.25, 0],
+			"scale": [0.5, 0.5, 0.51]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 2.25, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"ground": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
 }
