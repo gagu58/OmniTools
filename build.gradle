@@ -144,6 +144,8 @@ dependencies {
     implementation "curse.maven:ex-pattern-provider-892005:7129221"
     implementation "curse.maven:glodium-957920:5787208"
 
+    implementation "curse.maven:curios-309927:6529130"
+
     //纠缠方块依赖
     implementation "curse.maven:supermartijn642s-core-lib-454372:6076757"
     implementation "curse.maven:supermartijn642s-config-lib-438332:5546996"

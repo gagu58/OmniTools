@@ -38,5 +38,18 @@ public class OmniToolsRecipeProvider extends net.minecraft.data.recipes.RecipePr
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .unlockedBy(getHasName(Items.STICK), has(Items.STICK))
                 .save(output, id("crafting/omni_wrench"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.OMNI_VAJRA.get())
+                .pattern("ai ")
+                .pattern("ibi")
+                .pattern(" ic")
+                .define('i', Items.DIAMOND)
+                .define('a', Items.NETHER_STAR)
+                .define('b', Items.LODESTONE)
+                .define('c', Items.NETHERITE_INGOT)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .unlockedBy(getHasName(Items.STICK), has(Items.STICK))
+                .save(output, id("crafting/omni_vajra"));
+
     }
 }
