@@ -7,7 +7,8 @@
   "mixins": [
     "ItemStackMixin",
     "powah.EnergizingOrbBlockMixin",
-    "ae2.OmniToolItemAEMenuItemMixin"
+    "ae2.OmniToolItemAEMenuItemMixin",
+    "ae2.P2PTunnelPartInvoker"
   ],
   "client": [
     "draconicevolution.ClientEventHandlerMixin",

@@ -2,6 +2,7 @@ package com.omnitools.omniTools.compat.ae2;
 
 import com.omnitools.omniTools.api.IWrenchHandler;
 import com.omnitools.omniTools.api.WrenchContext;
+import com.omnitools.omniTools.mixin.ae2.P2PTunnelPartInvoker;
 import com.omnitools.omniTools.core.ToolMode;
 import appeng.api.ids.AEComponents;
 import appeng.api.parts.IPartHost;
@@ -14,13 +15,16 @@ import appeng.core.localization.PlayerMessages;
 import appeng.core.localization.Tooltips;
 import appeng.items.tools.MemoryCardItem;
 import appeng.parts.AEBasePart;
+import appeng.parts.p2p.P2PTunnelPart;
 import appeng.util.InteractionUtil;
 import appeng.util.SettingsFrom;
+import appeng.me.service.P2PService;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -94,7 +98,64 @@ public class Ae2MemoryCardWrenchHandler implements IWrenchHandler {
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
+    private InteractionResult handleP2P(Level level, Player player, ItemStack stack, boolean alt, P2PTunnelPart<?> tunnel) {
+        if (tunnel.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+
+        if (alt) {
+            short newFreq = tunnel.getFrequency();
+            boolean wasOutput = tunnel.isOutput();
+            ((P2PTunnelPartInvoker) (Object) tunnel).omnitools$invokeSetOutput(false);
+
+            boolean needsNewFrequency = wasOutput || newFreq == 0;
+            var grid = tunnel.getMainNode().getGrid();
+            if (grid != null) {
+                var p2p = P2PService.get(grid);
+                if (needsNewFrequency) {
+                    newFreq = p2p.newFrequency();
+                }
+                p2p.updateFreq(tunnel, newFreq);
+            }
+
+            tunnel.onTunnelConfigChange();
+
+            MemoryCardItem.clearCard(stack);
+            stack.set(AEComponents.EXPORTED_SETTINGS_SOURCE, tunnel.getPartItem().asItem().getDescription());
+            stack.applyComponents(tunnel.exportSettings(SettingsFrom.MEMORY_CARD));
+
+            if (needsNewFrequency) {
+                player.displayClientMessage(PREFIX.copy().append(PlayerMessages.ResetSettings.text()), true);
+            } else {
+                player.displayClientMessage(PREFIX.copy().append(PlayerMessages.SavedSettings.text()), true);
+            }
+            return InteractionResult.SUCCESS;
+        }
+
+        var p2pTunnelItem = stack.get(AEComponents.EXPORTED_P2P_TYPE);
+        if (p2pTunnelItem instanceof IPartItem<?> partItem
+                && P2PTunnelPart.class.isAssignableFrom(partItem.getPartClass())) {
+            appeng.api.parts.IPart newBus = tunnel;
+            if (newBus.getPartItem() != partItem) {
+                newBus = tunnel.getHost().replacePart(partItem, tunnel.getSide(), player, InteractionHand.MAIN_HAND);
+            }
+
+            if (newBus instanceof P2PTunnelPart<?> newTunnel) {
+                newTunnel.importSettings(SettingsFrom.MEMORY_CARD, stack.getComponents(), player);
+            }
+
+            player.displayClientMessage(PREFIX.copy().append(PlayerMessages.LoadedSettings.text()), true);
+            return InteractionResult.SUCCESS;
+        }
+
+        player.displayClientMessage(PREFIX.copy().append(PlayerMessages.InvalidMachine.text()), true);
+        return InteractionResult.SUCCESS;
+    }
+
     private InteractionResult handlePart(Level level, Player player, ItemStack stack, boolean alt, AEBasePart part) {
+        if (part instanceof P2PTunnelPart<?> p2p) {
+            return handleP2P(level, player, stack, alt, p2p);
+        }
         if (!part.useStandardMemoryCard()) {
             return InteractionResult.PASS;
         }
