@@ -5,6 +5,7 @@ import com.omnitools.omniTools.api.UseContext;
 import com.omnitools.omniTools.core.ToolMode;
 import mekanism.common.MekanismLang;
 import mekanism.common.registries.MekanismDataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,7 +31,7 @@ public class MekanismConfigCardUseHandler implements IUseHandler {
         ItemStack stack = context.getStack();
         if (level != null && player != null && !level.isClientSide) {
             stack.remove(MekanismDataComponents.CONFIGURATION_DATA);
-            player.displayClientMessage(MekanismLang.CONFIG_CARD_CLEARED.translate(), true);
+            player.displayClientMessage(Component.translatable("omnitools.compat.mekanism").append(" ").append(MekanismLang.CONFIG_CARD_CLEARED.translate()), true);
         }
         return InteractionResultHolder.sidedSuccess(stack, level != null && level.isClientSide);
     }

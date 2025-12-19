@@ -87,7 +87,7 @@ public class MekanismConfigCardWrenchHandler implements IWrenchHandler {
                 data.putString(SerializationConstants.DATA_NAME, translationKey);
                 NBTUtils.writeRegistryEntry(data, SerializationConstants.DATA_TYPE, BuiltInRegistries.BLOCK, configCardAccess.getConfigurationDataType());
                 stack.set(MekanismDataComponents.CONFIGURATION_DATA, data);
-                player.displayClientMessage(MekanismLang.CONFIG_CARD_GOT.translate(EnumColor.INDIGO, TextComponentUtil.translate(translationKey)), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.mekanism").append(" ").append(MekanismLang.CONFIG_CARD_GOT.translate(EnumColor.INDIGO, TextComponentUtil.translate(translationKey))), true);
                 if (player instanceof ServerPlayer serverPlayer) {
                     MekanismCriteriaTriggers.CONFIGURATION_CARD.value().trigger(serverPlayer, true);
                 }
@@ -105,12 +105,12 @@ public class MekanismConfigCardWrenchHandler implements IWrenchHandler {
             if (configCardAccess.isConfigurationDataCompatible(storedType)) {
                 configCardAccess.setConfigurationData(level.registryAccess(), player, data);
                 configCardAccess.configurationDataSet();
-                player.displayClientMessage(MekanismLang.CONFIG_CARD_SET.translate(EnumColor.INDIGO, getConfigCardName(data)), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.mekanism").append(" ").append(MekanismLang.CONFIG_CARD_SET.translate(EnumColor.INDIGO, getConfigCardName(data))), true);
                 if (player instanceof ServerPlayer serverPlayer) {
                     MekanismCriteriaTriggers.CONFIGURATION_CARD.value().trigger(serverPlayer, false);
                 }
             } else {
-                player.displayClientMessage(MekanismLang.CONFIG_CARD_UNEQUAL.translateColored(EnumColor.RED), true);
+                player.displayClientMessage(Component.translatable("omnitools.compat.mekanism").append(" ").append(MekanismLang.CONFIG_CARD_UNEQUAL.translateColored(EnumColor.RED)), true);
             }
         }
 
