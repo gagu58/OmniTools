@@ -7,7 +7,8 @@ package com.omnitools.omniTools.core;
 public enum ToolMode {
     WRENCH("wrench", "toolmode.omnitools.wrench"),
     LINK("link", "toolmode.omnitools.link"),
-    RENAME("rename", "toolmode.omnitools.rename");
+    RENAME("rename", "toolmode.omnitools.rename"),
+    CONFIGURATION("configuration", "toolmode.omnitools.configuration");
 
     private final String id;
     private final String translationKey;

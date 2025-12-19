@@ -8,6 +8,7 @@
   "toolmode.omnitools.wrench": "Wrench Mode",
   "toolmode.omnitools.link": "Link Mode[no wrech tag]",
   "toolmode.omnitools.rename": "Rename Mode[quartz_cutting_knife]",
+  "toolmode.omnitools.configuration": "Configuration Mode",
   "message.omnitools.mode_switched": "§6[OmniTool] §rMode switched to: §e%s",
   "message.omnitools.vajra_mining_speed": "§6[OmniTool] §rMining Speed: §e%s",
   "message.omnitools.vajra_pickup_mode": "§6[OmniTool] §rAuto Pickup: §e%s",

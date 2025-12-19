@@ -11,6 +11,10 @@
     {
       "predicate": { "omnitools:mode": 2.0 },
       "model": "omnitools:item/omni_wrench_rename"
+    },
+    {
+      "predicate": { "omnitools:mode": 3.0 },
+      "model": "omnitools:item/omni_wrench_configuration"
     }
   ],
   "display": {

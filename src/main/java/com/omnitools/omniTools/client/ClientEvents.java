@@ -45,6 +45,9 @@ public class ClientEvents {
                         if (mode == ToolMode.RENAME) {
                             return 2.0F;
                         }
+                        if (mode == ToolMode.CONFIGURATION) {
+                            return 3.0F;
+                        }
                         return 0.0F;
                     }
             );
