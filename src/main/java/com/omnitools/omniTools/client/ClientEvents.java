@@ -64,6 +64,7 @@ public class ClientEvents {
     //TODO 日后改成轮盘呼出选择
     @SubscribeEvent
     public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+        //扳手模式切换键
         CYCLE_MODE_KEYBIND = new KeyMapping(
                 "key.omnitools.cycle_mode",
                 InputConstants.Type.KEYSYM,
@@ -72,6 +73,7 @@ public class ClientEvents {
         );
         event.register(CYCLE_MODE_KEYBIND);
 
+        //金刚杵精准模式切换键
         TOGGLE_VAJRA_SILK_TOUCH_KEYBIND = new KeyMapping(
                 "key.omnitools.vajra_toggle_silk_touch",
                 InputConstants.Type.KEYSYM,

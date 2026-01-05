@@ -5,6 +5,8 @@
   "key.categories.omnitools": "OmniTools 控制",
   "key.omnitools.cycle_mode": "Omni 扳手：切换模式",
   "key.omnitools.vajra_toggle_silk_touch": "Omni 金刚杵：切换精准采集",
+  "key.omnitools.vajra_toggle_mining_speed_up": "Omni 金刚杵：挖掘速度增加",
+  "key.omnitools.vajra_toggle_mining_speed_down": "Omni 金刚杵：挖掘速度减少",
   "toolmode.omnitools.wrench": "普通扳手模式",
   "toolmode.omnitools.link": "连接模式[去除wrench标签]",
   "toolmode.omnitools.rename": "改名模式[石英切割刀]",

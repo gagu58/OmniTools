@@ -4,6 +4,8 @@
   "itemGroup.omnitools": "OmniTools",
   "key.omnitools.cycle_mode": "Cycle Tool Mode",
   "key.omnitools.vajra_toggle_silk_touch": "Omni Vajra: Toggle Silk Touch",
+  "key.omnitools.vajra_toggle_mining_speed_up": "Omni Vajra: Increase Mining Speed",
+  "key.omnitools.vajra_toggle_mining_speed_down": "Omni Vajra: Decrease Mining Speed",
   "key.categories.gameplay": "Gameplay",
   "key.categories.omnitools": "OmniTools Controls",
   "toolmode.omnitools.wrench": "Wrench Mode",
