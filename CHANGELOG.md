@@ -1,3 +1,15 @@
+# OmniTools 1.2.1
+
+## 中文
+- 为金刚杵添加精准采集模式切换（默认Y键，可自定义）
+- 金刚杵的挖掘速率调整方式改为按下PageUp/PageDown（可自定义）
+- 全能扳手的配置模式适配工业先锋的配置卡
+
+## English
+- Added Silk Touch mode toggle for Vajra (default Y key, customizable)
+- Changed Vajra mining speed adjustment to PageUp/PageDown keys (customizable)
+- Added Industrial Foregoing Configuration Card compatibility for Omni Wrench CONFIG mode
+
 # OmniTools 1.2.0
 
 ## 中文
